@@ -1,0 +1,6 @@
+<section>
+    <button type="submit" class="btn btn-default" [routerLink]="['/addbook']">Add Book</button>
+</section>
+<section class="results">
+    <app-book-item *ngFor="let book of bookList" [bookItem]="book"></app-book-item>
+</section>
