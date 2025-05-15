@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { Book } from '../interfaces/book'
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,13 +24,19 @@ export class BookService {
 
   saveBook(book: Book): Book | undefined{
   let savedBook: Book | undefined;
-    const data = this.http.post<Book>(this.url, book).subscribe(
+    this.http.post<Book>(this.url, book).subscribe(
       book => {
         savedBook = book
   });
 
   console.log(savedBook)
   return savedBook;
+}
+
+getBookById(id: Number) : Observable<Book> {
+  var book: Book | undefined;
+  return this.http.get<Book>(`${this.url}/${id}`);
+    // return book;
 }
 
   constructor() { }

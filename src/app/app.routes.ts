@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AddBookComponent } from './add-book/add-book.component';
+import { EditBookComponent } from './edit-book/edit-book.component';
 
 const routeConfig: Routes = [
     {
@@ -12,6 +13,11 @@ const routeConfig: Routes = [
         path:"addbook",
         component: AddBookComponent,
         title: "Add Book"
+    },
+    {
+        path:"editbook/:id",
+        component: EditBookComponent,
+        title: "Edit Book"
     }
 ]
 

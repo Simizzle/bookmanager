@@ -17,7 +17,6 @@ export class AddBookComponent {
 
   bookService: BookService = inject(BookService)
   form = new FormGroup({});
-  // model: any = { email: 'email@gmail.com' };
   model: any = {}
 
   fields: FormlyFieldConfig[] = [
