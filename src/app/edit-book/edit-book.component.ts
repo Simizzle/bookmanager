@@ -93,6 +93,5 @@ export class EditBookComponent {
   onSubmit(model: any) {
     this.bookService.updateBook(model);
     this.router.navigate(["/"])
-    this.bookService.getAllBooks();
   }
 }

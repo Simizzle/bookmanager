@@ -3,9 +3,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core'
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap'
 import { FormGroup } from '@angular/forms';
-import { FormlyFieldConfig } from '@ngx-formly/core';
+import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 import { BookService } from '../services/book.service';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -19,6 +19,11 @@ export class AddBookComponent {
   bookService: BookService = inject(BookService)
   form = new FormGroup({});
   model: any = {}
+  options: FormlyFormOptions = {};
+
+  constructor(private router: Router) {
+
+  }
 
   fields: FormlyFieldConfig[] = [
     {
@@ -74,7 +79,8 @@ export class AddBookComponent {
 },
   ];
 
-  onSubmit(model: any) {
-    this.bookService.saveBook(model)    
+  onSubmit() {
+    this.bookService.saveBook(this.model)
+    this.router.navigate(["/"])
   }
 }

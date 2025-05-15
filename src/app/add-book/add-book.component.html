@@ -1,15 +1,12 @@
 <h2>Add book</h2>
-<form [formGroup]="form" (ngSubmit)="onSubmit(model)">
-    <formly-form [form]="form" [fields]="fields" [model]="model"></formly-form>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <formly-form [form]="form" [fields]="fields" [model]="model" [options]="options"></formly-form>
+    <button type="submit" class="btn btn-default" [disabled]="!form.valid">Submit</button>
 </form>
 <section class="photo" *ngIf="model?.imgUrl">
-    <img
-class="cover-photo"
-[src]="model?.imgUrl"
-alt="Photo of the cover of {{ model?.title }}"
+    <img class="cover-photo" [src]="model?.imgUrl" alt="Photo of the cover of {{ model?.title }}"
 />
 </section>
-<button type="submit" class="btn btn-default" [routerLink]="['/']" [disabled]="!form.valid">Submit</button>
 <section class="back-home">
-    <button type="submit" class="btn btn-back" [routerLink]="['/']">Back</button>
+    <button type="button" class="btn btn-back" [routerLink]="['/']">Back</button>
 </section>
