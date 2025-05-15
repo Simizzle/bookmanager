@@ -6,10 +6,11 @@ import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { BookService } from '../services/book.service';
 import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-book',
-  imports: [ReactiveFormsModule, FormlyModule, FormlyBootstrapModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, FormlyModule, FormlyBootstrapModule, RouterModule],
   templateUrl: './add-book.component.html',
   styleUrl: './add-book.component.css'
 })

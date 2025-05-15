@@ -1,9 +1,24 @@
 <h2>Edit book</h2>
-<form [formGroup]="form" (ngSubmit)="submit()">
-    <img class="cover-photo" [src]="book?.imgUrl" alt="Photo of the cover of {{ book?.title }}">
-    <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
-    <button type="submit" class="btn btn-primary submit-button" [disabled]="!form.valid">Submit</button>
-    <section class="back-home">
-        <button type="submit" class="btn btn-back" [routerLink]="['/']">Back</button>
-    </section>
-  </form>
+<form [formGroup]="form" (ngSubmit)="onSubmit(model)">
+  <img
+    class="cover-photo"
+    [src]="book?.imgUrl"
+    alt="Photo of the cover of {{ book?.title }}"
+  />
+  <formly-form
+    [model]="model"
+    [fields]="fields"
+    [options]="options"
+    [form]="form"
+  ></formly-form>
+  <button
+    type="submit"
+    class="btn btn-primary submit-button"
+    [disabled]="!form.valid"
+  >
+    Submit
+  </button>
+</form>
+<section class="back-home">
+  <button type="submit" class="btn btn-back" [routerLink]="['/']">Back</button>
+</section>

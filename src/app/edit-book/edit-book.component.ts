@@ -1,17 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { BookService } from '../services/book.service';
 import { Book } from '../interfaces/book';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
-import { FormlyModule } from '@ngx-formly/core'
-import { FormlyMaterialModule } from '@ngx-formly/material';
+import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 
 @Component({
   selector: 'app-edit-book',
-  imports: [CommonModule, ReactiveFormsModule, FormlyModule, FormlyBootstrapModule, RouterModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormlyModule,
+    FormlyBootstrapModule,
+    RouterModule,
+  ],
   templateUrl: './edit-book.component.html',
   styleUrl: './edit-book.component.css',
 })
@@ -20,21 +25,19 @@ export class EditBookComponent {
   bookService: BookService = inject(BookService);
   route: ActivatedRoute = inject(ActivatedRoute);
 
-  constructor() {
+  constructor(private router: Router) {
     const bookId = Number(this.route.snapshot.params['id']);
     this.bookService.getBookById(bookId).subscribe((data) => {
       this.book = data;
-      this.model = this.book
-
+      this.model = this.book;
     });
   }
 
   form = new FormGroup({});
 
-  options: FormlyFormOptions = {
-  };
+  options: FormlyFormOptions = {};
 
-  model: Book | undefined;
+  model: any;
 
   fields: FormlyFieldConfig[] = [
     {
@@ -42,16 +45,16 @@ export class EditBookComponent {
       type: 'input',
       props: {
         label: 'Title',
-        required: true
-      }
+        required: true,
+      },
     },
     {
       key: 'author',
       type: 'input',
       props: {
         label: 'Author',
-        required: true
-      }
+        required: true,
+      },
     },
     {
       key: 'description',
@@ -59,7 +62,7 @@ export class EditBookComponent {
       props: {
         label: 'Description',
         required: true,
-      }
+      },
     },
     {
       key: 'genre',
@@ -73,7 +76,7 @@ export class EditBookComponent {
           { label: 'Biography', value: 'Biography' },
           { label: 'Education', value: 'Education' },
         ],
-        required: true
+        required: true,
       },
     },
     {
@@ -82,12 +85,14 @@ export class EditBookComponent {
       defaultValue: 'This is a default value',
       props: {
         label: 'Image URL',
-        required: true
-      }
-    }
-  ]
+        required: true,
+      },
+    },
+  ];
 
-  submit() {
-    alert(JSON.stringify(this.model));
+  onSubmit(model: any) {
+    this.bookService.updateBook(model);
+    this.router.navigate(["/"])
+    this.bookService.getAllBooks();
   }
 }

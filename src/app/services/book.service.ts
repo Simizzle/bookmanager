@@ -28,8 +28,6 @@ export class BookService {
       book => {
         savedBook = book
   });
-
-  console.log(savedBook)
   return savedBook;
 }
 
@@ -37,6 +35,14 @@ getBookById(id: Number) : Observable<Book> {
   var book: Book | undefined;
   return this.http.get<Book>(`${this.url}/${id}`);
     // return book;
+}
+
+updateBook(book: Book): Book | undefined {
+  let updatedBook: Book | undefined;
+  this.http.put<Book>(this.url, book).subscribe(
+    book => updatedBook = book
+  )
+  return updatedBook;
 }
 
   constructor() { }
