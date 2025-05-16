@@ -17,7 +17,7 @@ export class BookService {
     return this._refreshRequired;
   }
 
-  getAllBooks(): Observable<Object> {
+  getAllBooks(): Observable<Book> {
     return this.http.get<Book>(this.url)
   }
 
