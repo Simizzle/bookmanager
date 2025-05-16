@@ -3,6 +3,7 @@ import { BookItemComponent } from "../book-item/book-item.component";
 import { BookService } from '../services/book.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Book } from '../interfaces/book';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  bookList: any;
+  bookList: Book[] =[];
   bookService: BookService = inject(BookService)
 
   constructor() {
@@ -26,6 +27,7 @@ export class HomeComponent {
 
   getAll() {
     this.bookService.getAllBooks().subscribe(books => {
+      books.sort((a, b) => a.id - b.id)
       this.bookList = books;
     })
   }
