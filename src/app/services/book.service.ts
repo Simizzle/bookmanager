@@ -42,8 +42,8 @@ export class BookService {
       )
   }
 
-  deleteBook(id: Number): Observable<string> {
-    return this.http.delete<string>(`${this.url}/${id}`).pipe(
+  deleteBook(id: Number): Observable<void> {
+    return this.http.delete<void>(`${this.url}/${id}`).pipe(
       tap(()=> {
         this._refreshRequired.next();
       })

@@ -96,10 +96,7 @@ export class EditBookComponent {
   }
 
   onDeleteClicked() {
-    let message: string | undefined;
-    this.bookService.deleteBook(this.model?.id).subscribe((response) => {
-      message = response;
-    });
-    console.log(this.book?.id)
+    this.bookService.deleteBook(this.model?.id).subscribe();
+    this.router.navigate(["/"])
   }
 }
