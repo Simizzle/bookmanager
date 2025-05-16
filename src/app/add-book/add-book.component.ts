@@ -80,7 +80,7 @@ export class AddBookComponent {
   ];
 
   onSubmit() {
-    this.bookService.saveBook(this.model)
+    this.bookService.saveBook(this.model).subscribe()
     this.router.navigate(["/"])
   }
 }

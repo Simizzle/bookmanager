@@ -1,6 +1,5 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Pipe, PipeTransform } from '@angular/core';
 import { BookItemComponent } from "../book-item/book-item.component";
-import { Book } from '../interfaces/book';
 import { BookService } from '../services/book.service';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -12,11 +11,24 @@ import { RouterModule } from '@angular/router';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  
-  bookList = new Set<Book>()
+  bookList: any;
   bookService: BookService = inject(BookService)
 
   constructor() {
-    this.bookList = this.bookService.getAllBooks()
   }
+
+  ngOnInit(): void {
+    this.getAll()
+    this.bookService.refreshRequired.subscribe((books) => {
+      this.getAll();
+  })
+};
+
+  getAll() {
+    this.bookService.getAllBooks().subscribe(books => {
+      this.bookList = books;
+    })
+  }
+
+
 }

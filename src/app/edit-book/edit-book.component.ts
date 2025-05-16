@@ -91,12 +91,15 @@ export class EditBookComponent {
   ];
 
   onSubmit(model: any) {
-    this.bookService.updateBook(model);
+    this.bookService.updateBook(model).subscribe();
     this.router.navigate(["/"])
   }
 
   onDeleteClicked() {
-    this.bookService.deleteBook(this.model?.id)
+    let message: string | undefined;
+    this.bookService.deleteBook(this.model?.id).subscribe((response) => {
+      message = response;
+    });
     console.log(this.book?.id)
   }
 }
