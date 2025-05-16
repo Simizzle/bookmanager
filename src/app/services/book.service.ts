@@ -43,5 +43,14 @@ export class BookService {
     return updatedBook;
   }
 
+  deleteBook(id: Number): void {
+    let message: string | undefined;
+    this.http.delete<string>(`${this.url}/${id}`).subscribe((response) => {
+      message = response;
+    });
+
+    console.log(message)
+  }
+
   constructor() {}
 }

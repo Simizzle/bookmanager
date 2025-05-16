@@ -94,4 +94,9 @@ export class EditBookComponent {
     this.bookService.updateBook(model);
     this.router.navigate(["/"])
   }
+
+  onDeleteClicked() {
+    this.bookService.deleteBook(this.model?.id)
+    console.log(this.book?.id)
+  }
 }
