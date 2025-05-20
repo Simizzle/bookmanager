@@ -27,9 +27,7 @@ export class HomeComponent {
 
   getAll() {
     this.bookService.getAllBooks().subscribe(books => {
-      books.sort((a, b) => a.id - b.id)
-      this.bookList = books;
-      console.log(books)
+      this.bookList = books.sort((a, b) => a.id - b.id);
     })
   }
 
